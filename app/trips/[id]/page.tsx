@@ -11,6 +11,7 @@ export default function TripDetailPage({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(true);
   const [regenerating, setRegenerating] = useState(false);
   const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     fetch(`/api/trips/${params.id}`)
@@ -52,6 +53,8 @@ export default function TripDetailPage({ params }: { params: { id: string } }) {
       ...trip.tips.map((tip) => `- ${tip}`)
     ].join('\n');
     await navigator.clipboard.writeText(text);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
   }
 
   if (loading) return <main className="shell py-8"><div className="panel rounded-lg p-8">正在读取行程...</div></main>;
@@ -64,10 +67,10 @@ export default function TripDetailPage({ params }: { params: { id: string } }) {
           {regenerating ? '正在重生成...' : '按原条件重生成'}
         </button>
         <button className="rounded-full border border-[rgba(20,33,61,0.16)] bg-white/60 px-5 py-3 text-sm font-semibold" onClick={copyMarkdown}>
-          复制 Markdown
+          {copied ? '已复制 Markdown' : '复制 Markdown'}
         </button>
         <button className="rounded-full border border-dashed border-[rgba(20,33,61,0.28)] bg-white/40 px-5 py-3 text-sm font-semibold text-[#65758b]" disabled>
-          PDF 导出占位
+          PDF 导出即将支持
         </button>
       </div>
       {error && <div className="mb-5 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}

@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { generateTripWithAgent } from '@/lib/agent';
+import provider from '@/lib/provider';
 import { getTrip, recordRun, saveTrip } from '@/lib/store';
+
+const { getFailureProvider } = provider;
 
 export async function POST(_request: Request, { params }: { params: { id: string } }) {
   const startedAt = Date.now();
@@ -36,7 +39,7 @@ export async function POST(_request: Request, { params }: { params: { id: string
     const message = error instanceof Error ? error.message : '重生成失败';
     await recordRun({
       tripPlanId: original.id,
-      provider: process.env.DASHSCOPE_API_KEY ? 'dashscope' : 'mock-agent',
+      provider: getFailureProvider(process.env),
       latencyMs: Date.now() - startedAt,
       status: 'failed',
       errorMessage: message,
