@@ -2,6 +2,8 @@
 
 一个面向作品集展示的智能旅行规划 MVP。用户填写出发地、目的地、日期、预算和偏好后，系统会调用阿里云百炼生成结构化每日行程，并把结果持久化保存到 Supabase。
 
+在线演示：[https://travel-planning-agent.netlify.app](https://travel-planning-agent.netlify.app)
+
 ## 项目定位
 
 这不是聊天窗口，而是一个“行程产品”：用表单收集旅行需求，用时间轴和卡片展示可执行路线，用历史、详情、重生成和后台统计形成完整产品闭环。
