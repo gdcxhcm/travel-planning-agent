@@ -57,8 +57,8 @@ export default function PlannerPage() {
       <div className="grid gap-6 lg:grid-cols-[420px_1fr]">
         <form className="panel h-fit rounded-lg p-5" onSubmit={submit}>
           <div className="grid gap-4">
-            <Field label="出发地" name="origin" defaultValue="上海" />
-            <Field label="目的地" name="destination" defaultValue="成都" />
+            <Field label="出发地" name="origin" />
+            <Field label="目的地" name="destination" />
             <div className="grid grid-cols-2 gap-3">
               <Field label="开始日期" name="startDate" type="date" defaultValue="2026-07-01" />
               <Field label="结束日期" name="endDate" type="date" defaultValue="2026-07-03" />
